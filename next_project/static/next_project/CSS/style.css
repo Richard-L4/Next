@@ -1,109 +1,141 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-html, body {
-    height: 100%;
-    font-family: 'Times New Roman', Times, serif;
+html,
+body {
+  height: 100%;
+  font-family: "Times New Roman", Times, serif;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    padding-top: 4.375rem;
-    background-image: url('/static/images/techimage.jpg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed;
-    image-rendering: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 4.375rem;
+  background-image: url("/static/images/techimage.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  image-rendering: auto;
 }
 
 main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    justify-content: flex-start;
-    padding: 2rem 1rem;
-    gap: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: flex-start;
+  padding: 2rem 1rem;
+  gap: 2rem;
 }
 
 nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: #131137;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-around;
-    gap: 2rem;
-    flex-wrap: wrap;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #131137;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 nav a {
-    color: rgb(203 46 211);
-    text-decoration: none;
-    transition: color 0.3s;
+  color: rgb(203 46 211);
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
 nav a:hover {
+  color: yellow;
+}
+
+.color {
     color: yellow;
 }
 
 .hero {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40vh;
-    position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+  position: relative;
 }
 
 .hero-overlay {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 2rem 3rem;
-    border-radius: 8px;
-    text-align: center;
-    display: inline-block;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 2rem 3rem;
+  border-radius: 8px;
+  text-align: center;
+  display: inline-block;
 }
 
 .hero-overlay h1 {
-    color: yellow;
-    margin: 0;
+  color: yellow;
+  margin: 0;
+}
+
+.robot-row {
+  display: flex;
+  justify-content: center;
+  gap: 12rem;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+}
+
+.card {
+  width: 18rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 12px 24px rgba(220, 215, 215, 0.5);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* lifts the card up */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.45); /* bigger shadow on hover */
+  cursor: pointer; /* optional, shows pointer on hover */
+}
+
+.card img {
+  width: 100%;
+  display: block;
 }
 
 
 footer {
-    background-color: #131137;
-    color: rgb(203 46 211);
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    width: 100%;
-    box-sizing: border-box;
+  background-color: #131137;
+  color: rgb(203 46 211);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .social-links a {
-    color: rgb(203 46 211);
-    text-decoration: none;
-    transition: color 0.3s;
+  color: rgb(203 46 211);
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
 .social-links a:hover {
-    color: yellow;
+  color: yellow;
 }
