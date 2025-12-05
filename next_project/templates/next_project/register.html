@@ -1,39 +1,8 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'next_project/base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The next project | Register</title>
-    <link rel="stylesheet" href="{% static 'next_project/CSS/style.css' %}">
-    <script defer src="{% static 'next_project/JS/next.js' %}"></script>
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'next_project/favicon/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'next_project/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'next_project/favicon.png' %}">
-    <link rel="manifest" href="{% static 'next_project/favicon/site.webmanifest' %}">
- 
-</head>
-<body>
-    <nav>
-        <a href="{% url 'index' %}">Home</a>
-        <a href="{% url 'about' %}">About</a>
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'logout' %}">Logout</a>
-        <a href="{% url 'admin:index' %}">admin</a>
-    </nav>
 
-    <main>
-        <h1 class="color">The register page</h1>
-    </main>
-    <footer>
-        <p>&copy; 2025 Your Website Name</p>
-        <div class="social-links">
-            <a href="https://www.youtube.com" target="_blank" aria-label="YouTube">YouTube</a>
-            <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">LinkedIn</a>
-            <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">Instagram</a>
-        </div>
-    </footer>
-</body>
+{% block title %}Registe | The Next Project{% endblock %}
 
-</html>
+{% block content %}
+<h1 class="color">The register page</h1>
+{% endblock %}

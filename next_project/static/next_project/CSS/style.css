@@ -1,10 +1,10 @@
 * {
- box-sizing: border-box;
- margin: 0;
- padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-html,body {
+html, body {
     height: 100%;
     font-family: 'Times New Roman', Times, serif;
 }
@@ -24,21 +24,21 @@ body {
 
 main {
     flex: 1;
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     justify-content: flex-start;
     padding: 2rem 1rem;
-    gap: 2rem
+    gap: 2rem;
 }
 
 nav {
     position: fixed;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     width: 100%;
-    z-index: 1000%;
+    z-index: 1000;
     background-color: #131137;
     padding: 1rem;
     display: flex;
@@ -48,43 +48,62 @@ nav {
 }
 
 nav a {
-    color: rgb(121, 7, 127);
+    color: rgb(203 46 211);
+    text-decoration: none;
     transition: color 0.3s;
 }
 
 nav a:hover {
-    color: yellow;         /* color on hover */
+    color: yellow;
 }
 
-.color {
-    color: blue;
-    cursor: pointer;
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    position: relative;
 }
+
+.hero-overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 2rem 3rem;
+    border-radius: 8px;
+    text-align: center;
+    display: inline-block;
+}
+
+.hero-overlay h1 {
+    color: yellow;
+    margin: 0;
+}
+
 
 footer {
     background-color: #131137;
-    color: rgb(121, 7, 127);
+    color: rgb(203 46 211);
     padding: 1rem;
-    margin-top: auto;
     display: flex;
-    flex-direction: column;   /* stack items vertically */
-    align-items: center;      /* center them horizontally */
+    flex-direction: column;
+    align-items: center;
     gap: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
 }
-
 
 .social-links {
     display: flex;
-    justify-content: space-evenly;  /* spreads links */
-    width: 100%;                    /* full width row */
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .social-links a {
-    color: rgb(121, 7, 127);
+    color: rgb(203 46 211);
     text-decoration: none;
-    transition: color 0.3s; /* smooth color change */
+    transition: color 0.3s;
 }
 
 .social-links a:hover {
-    color: yellow; /* change color on hover */
+    color: yellow;
 }
