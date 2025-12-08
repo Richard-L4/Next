@@ -5,26 +5,29 @@
 
 {% block content %}
 <section class="hero">
-    <div class="hero-overlay">
-        <h1 class="color">I Robot</h1>
-    </div>
+  <div class="hero-overlay">
+    <h1 class="color">I Robot</h1>
+  </div>
 </section>
 <section class="i-robot">
   <div class="robot-row">
-
-    <div class="card" style="width: 18rem;">
-      <img src="/static/images/i-robot.jpg" class="card-img-top" alt=".">
-      <div class="card-body">
-        <p class="card-text">Get ready for the rise of AI...</p>
+    <a href="{% url 'detail' %}" class="text-decoration-none">
+      <div class="card" style="width: 18rem;">
+        <img src="/static/images/i-robot.jpg" class="card-img-top" alt=".">
+        <div class="card-body">
+          <p class="card-text">Get ready for the rise of AI...</p>
+        </div>
       </div>
-    </div>
+    </a>
 
-    <div class="card" style="width: 18rem;">
-      <img src="/static/images/i-robot.jpg" class="card-img-top" alt=".">
-      <div class="card-body">
-        <p class="card-text">Get ready for the rise of AI...</p>
+    <a href="{% url 'detail' %}" class="text-decoration-none">
+      <div class="card" style="width: 18rem;">
+        <img src="/static/images/i-robot.jpg" class="card-img-top" alt=".">
+        <div class="card-body">
+          <p class="card-text">Get ready for the rise of AI...</p>
+        </div>
       </div>
-    </div>
+    </a>
 
   </div>
 </section>

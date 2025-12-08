@@ -5,6 +5,10 @@ def index(request):
     return render(request, "next_project/index.html")
 
 
+def detail(request):
+    return render(request, "next_project/detail.html")
+
+
 def about(request):
     return render(request, "next_project/about.html")
 
