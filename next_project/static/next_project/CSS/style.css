@@ -58,8 +58,57 @@ nav a:hover {
   color: yellow;
 }
 
+/* Toggle button for mobile */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: rgb(203 46 211);
+  font-size: 1.75rem;
+  cursor: pointer;
+}
+
+/* Large-screen links layout */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+/* Mobile behavior */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    width: 100%;
+    margin-top: 1rem;
+    grid-template-columns: repeat(2, 1fr); /* two columns */
+    gap: 0.5rem;
+  }
+
+  .nav-links.open {
+    display: grid;
+  }
+
+  .nav-links a {
+    text-align: center;
+  }
+}
+
+/* Center the last link if it’s alone in the row */
+.nav-links a:last-child {
+  grid-column: 1 / -1;  /* spans both columns */
+  justify-self: center;  /* centers horizontally */
+}
+
+
+
 .color {
-    color: yellow;
+  color: yellow;
 }
 
 .hero {
@@ -101,7 +150,7 @@ nav a:hover {
 
 .card:hover {
   transform: translateY(-5px); /* lifts the card up */
-  box-shadow: 0 20px 40px rgba(0,0,0,0.45); /* bigger shadow on hover */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45); /* bigger shadow on hover */
   cursor: pointer; /* optional, shows pointer on hover */
 }
 
@@ -109,7 +158,6 @@ nav a:hover {
   width: 100%;
   display: block;
 }
-
 
 footer {
   background-color: #131137;
