@@ -58,6 +58,11 @@ nav a:hover {
   color: yellow;
 }
 
+nav a.active {
+  color: yellow;
+}
+
+
 /* Toggle button for mobile */
 .nav-toggle {
   display: none;
@@ -97,15 +102,18 @@ nav a:hover {
   .nav-links a {
     text-align: center;
   }
+
+  nav a:hover,
+  nav a:active {
+    color: yellow !important;
+  }
 }
 
 /* Center the last link if it’s alone in the row */
 .nav-links a:last-child {
-  grid-column: 1 / -1;  /* spans both columns */
-  justify-self: center;  /* centers horizontally */
+  grid-column: 1 / -1; /* spans both columns */
+  justify-self: center; /* centers horizontally */
 }
-
-
 
 .color {
   color: yellow;
