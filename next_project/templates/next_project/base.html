@@ -20,33 +20,33 @@
     <nav>
         <button class="nav-toggle" id="navToggle">☰</button>
         <div class="nav-links" id="navLinks">
-            <a href="{% url 'index' %}" class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+            <a href="{% url 'index' %}" class="{% if active_tab == 'index' %}active{% endif %}">
                 Home
             </a>
 
-            <a href="{% url 'detail' %}" class="{% if request.resolver_match.url_name == 'detail' %}active{% endif %}">
+            <a href="{% url 'detail' %}" class="{% if active_tab == 'detail' %}active{% endif %}">
                 Detail
             </a>
 
-            <a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+            <a href="{% url 'about' %}" class="{% if active_tab == 'about' %}active{% endif %}">
                 About
             </a>
 
-            <a href="{% url 'login' %}" class="{% if request.resolver_match.url_name == 'login' %}active{% endif %}">
+            <a href="{% url 'login' %}" class="{% if active_tab == 'login' %}active{% endif %}">
                 Login
             </a>
 
-            <a href="{% url 'logout' %}" class="{% if request.resolver_match.url_name == 'logout' %}active{% endif %}">
+            <a href="{% url 'logout' %}" class="{% if active_tab == 'logout' %}active{% endif %}">
                 Logout
             </a>
 
             <a href="{% url 'register' %}"
-                class="{% if request.resolver_match.url_name == 'register' %}active{% endif %}">
+                class="{% if active_tab == 'register' %}active{% endif %}">
                 Register
             </a>
 
             <a href="{% url 'admin:index' %}"
-                class="{% if request.resolver_match.url_name == 'admin:index' %}active{% endif %}">
+                class="{% if active_tab == 'admin:index' %}active{% endif %}">
                 Admin
             </a>
 
