@@ -71,6 +71,8 @@ nav a.active {
   color: rgb(203 46 211);
   font-size: 1.75rem;
   cursor: pointer;
+  margin-right: auto;
+  margin-left: 3rem;
 }
 
 /* Large-screen links layout */
@@ -85,6 +87,10 @@ nav a.active {
 @media (max-width: 768px) {
   .nav-toggle {
     display: block;
+  }
+
+  .hero {
+    padding-top: 6rem; /* adjust this number */
   }
 
   .nav-links {
