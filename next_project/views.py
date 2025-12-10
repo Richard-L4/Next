@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import ContactForm
 
 
 def index(request):
@@ -11,7 +12,23 @@ def detail(request):
 
 
 def about(request):
-    return render(request, "next_project/about.html", {'active_tab': 'about'})
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(
+                request,
+                'next_project/about.html',
+                {
+                    'form': ContactForm(),
+                    'success': True
+                }
+            )
+    else:
+        form = ContactForm()
+    return render(request,
+                  "next_project/about.html",
+                  {'active_tab': 'about', 'form': form})
 
 
 def login(request):

@@ -4,9 +4,38 @@
 {% block title %}About | The Next Project{% endblock %}
 
 {% block content %}
-<section class="hero">
-    <div class="hero-overlay">
-        <h1 class="color">The about page</h1>
+<main>
+
+    <section class="hero">
+        <div class="hero-overlay">
+            <h1 class="color">The about page</h1>
+        </div>
+    </section>
+
+    <section class="hero-contact">
+        <div class="hero-overlay-contact">
+            <h1 class="color">Who we are</h1>
+        </div>
+    </section>
+
+    <div class="form-map-container">
+        <section id="form">
+
+            <form id="contact-form" method="post" action="{% url 'about' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+            </form>
+
+        </section>
+
+        <div class="map">
+            <iframe id="map" src="https://www.google.com/maps/embed?pb=..." allowfullscreen loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
     </div>
-</section>
+</main>
 {% endblock %}
