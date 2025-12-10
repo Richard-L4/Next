@@ -115,6 +115,13 @@ nav a.active {
   }
 }
 
+@media screen and (max-width: 375px) {
+    body {
+        padding-top: 11rem; /* increase until the dropdown clears */
+    }
+}
+
+
 /* Center the last link if it’s alone in the row */
 .nav-links a:last-child {
   grid-column: 1 / -1; /* spans both columns */
