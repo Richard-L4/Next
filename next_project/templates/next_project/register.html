@@ -5,10 +5,22 @@
 
 {% block content %}
 <section class="hero">
-        <div class="hero-overlay">
-            <h1 data-i18n="register_title" class="color">The register page</h1>
-            <p data-i18n="register_content" class="color">This is the registration page.</p>
-            <button id="switch-lang">English / Español</button>
-        </div>
+    <div class="hero-overlay">
+        <h1 data-i18n="register_title" class="color">The register page</h1>
+        <p data-i18n="register_content" class="color">This is the registration page.</p>
+        <button id="switch-lang">English / Español</button>
+    </div>
+</section>
+<div class="form-map-container">
+
+    <section id="form">
+        <form id="form" method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <a>Please enter password</a>
+            <button type="submit">Submit</button>
+        </form>
     </section>
+    
+</div>
 {% endblock %}

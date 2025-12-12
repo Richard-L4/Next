@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from .forms import ContactForm
+from django.shortcuts import render, redirect
+from .forms import ContactForm, RegisterForm
+from django.contrib import messages
 
 
 def index(request):
@@ -41,5 +42,17 @@ def logout(request):
 
 
 def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('name')
+            messages.success(
+                request, f'Account created for {username}! You can now log in.'
+            )
+            return redirect('login')
+    else:
+        form = RegisterForm()
     return render(request,
-                  "next_project/register.html", {'active_tab': 'register'})
+                  "next_project/register.html", {
+                      'form': form, 'active_tab': 'register'})

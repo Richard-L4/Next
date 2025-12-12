@@ -5,10 +5,19 @@
 
 {% block content %}
 <section class="hero">
-        <div class="hero-overlay">
-            <h1 data-i18n="login_title" class="color">The login page</h1>
-            <p data-i18n="login_content" class="color">This page lets you login.</p>
-            <button id="switch-lang">English / Español</button>
-        </div>
-    </section>
+    <div class="hero-overlay">
+        <h1 data-i18n="login_title" class="color">The login page</h1>
+        <p data-i18n="login_content" class="color">This page lets you login.</p>
+        <button id="switch-lang">English / Español</button>
+    </div>
+</section>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+
 {% endblock %}
