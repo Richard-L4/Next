@@ -14,7 +14,7 @@
 <div class="form-map-container">
 
     <section id="form">
-        <form id="form" method="post" action="{% url 'register' %}">
+        <form id="contact-form" method="post" action="{% url 'register' %}">
             {% csrf_token %}
             {{ form.as_p }}
             <a>Please enter password</a>
