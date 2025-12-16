@@ -48,6 +48,9 @@ const translations = {
     logout_title: "The logout page",
     logout_content: "This is the page lets you logout",
 
+    confrim_logout_title: "Confirm logout page",
+    confirm_logout_content: "This page confirms you want to logout",
+
     register_title: "The register page",
     register_content: "This is the page for registration",
 
@@ -68,6 +71,9 @@ const translations = {
 
     logout_title: "La pagina de cerrar",
     logout_content: "Este es la pagina para permitarse cerrar",
+
+    confrim_logout_title: "La pagina para confirmerse cerrar",
+    confirm_logout_content: "Este pagina es para permitirse cerrar la seccion",
 
     register_title: "La pagina de registracion",
     register_content: "Este es la pagina para registracion",

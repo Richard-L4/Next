@@ -1,0 +1,20 @@
+{% extends 'next_project/base.html' %}
+
+
+{% block title %}Logout | The Next Project{% endblock %}
+
+{% block content %}
+<section class="hero hero--confirm-logout">
+        <div class="hero-overlay">
+            <h1 data-i18n="confirm-logout_title" class="color">Confirm logout page</h1>
+            <p data-i18n="confirm-logout_content" class="color">This page confirms you want to logout.</p>
+            <button id="switch-lang">English / Español</button>
+        </div>
+    </section>
+
+<form method="post" action="{% url 'confirm_logout' %}"  class="confirm-logout-form">
+    {% csrf_token %}
+    <button id="clg" type="submit">Confirm Logout</button>
+    <a href="{% url 'index' %}" class="cancel-link">Cancel</a>
+</form>
+{% endblock %}

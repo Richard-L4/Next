@@ -36,3 +36,12 @@ class RegisterForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['address'].required = False
+
+
+class LoginForm(forms.Form):
+    name = forms.CharField(max_length=20, label="Username")
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Enter your password'}),
+        label="Password"
+    )
