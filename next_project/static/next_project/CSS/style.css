@@ -402,7 +402,7 @@ nav a.active {
 .hero.hero--confirm-logout .hero-overlay {
     position: relative;
     z-index: 1;                /* above hero background */
-    padding: 1rem 0;
+    padding: 1rem 1rem;
     text-align: center;
 }
 
@@ -413,6 +413,7 @@ nav a.active {
     margin: 2rem auto 4rem;    /* space above and below form */
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
     max-width: 450px;
 }
