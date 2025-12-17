@@ -6,10 +6,12 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from .models import CardText
+from django.core.paginator import Paginator
 
 
 def index(request):
-    return render(request, "next_project/index.html", {'active_tab': 'index'})
+    return render(request, "next_project/index.html",
+                  {'active_tab': 'index'})
 
 
 def about(request):
@@ -83,27 +85,31 @@ def register(request):
 def detail_view(request):
     lang = request.GET.get('lang', 'en')
 
-    # Get first card or None
-    card = CardText.objects.first()
+    card_text = CardText.objects.all()
+    paginator = Paginator(card_text, 1)  # 1 card per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # Get the card on this page
+    card = page_obj[0] if page_obj else None
 
     if card:
         translation = card.translations.filter(language=lang).first()
-        if translation:
-            content = translation.content
-        else:
-            content = card.content or 'Content coming soon.'
+        content = translation.content if translation else (
+            card.content or 'Content coming soon.')
     else:
         # Fallback card if no cards exist
         card = type('Card', (), {
             'title': 'Coming Soon',
             'image_name': 'placeholder.png',
             'content': 'This card will be available soon.'
-
         })()
         content = card.content
 
     return render(request, "next_project/detail.html", {
         'card': card,
         'content': content,
-        'active_tab': 'detail'  # use just a simple string, not a filename
+        'active_tab': 'detail',
+        'page_obj': page_obj,
+        'is_paginated': page_obj.has_other_pages(),
     })

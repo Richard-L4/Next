@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}The Next Project{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'next_project/CSS/style.css' %}">
     <script defer src="{% static 'next_project/JS/next.js' %}"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'next_project/favicon/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'next_project/favicon/favicon-32x32.png' %}">
@@ -14,10 +13,11 @@
     <link rel="manifest" href="{% static 'next_project/favicon/site.webmanifest' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'next_project/CSS/style.css' %}">
 </head>
 
 <body>
-    <nav>
+    <nav class="site-nav">
         <button class="nav-toggle" id="navToggle">☰</button>
         <div class="nav-links" id="navLinks">
             <a href="{% url 'index' %}" class="{% if active_tab == 'index' %}active{% endif %}">
@@ -40,13 +40,11 @@
                 Logout
             </a>
 
-            <a href="{% url 'register' %}"
-                class="{% if active_tab == 'register' %}active{% endif %}">
+            <a href="{% url 'register' %}" class="{% if active_tab == 'register' %}active{% endif %}">
                 Register
             </a>
 
-            <a href="{% url 'admin:index' %}"
-                class="{% if active_tab == 'admin:index' %}active{% endif %}">
+            <a href="{% url 'admin:index' %}" class="{% if active_tab == 'admin:index' %}active{% endif %}">
                 Admin
             </a>
 

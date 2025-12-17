@@ -34,7 +34,7 @@ main {
   gap: 2rem;
 }
 
-nav {
+.site-nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -189,32 +189,56 @@ nav a.active {
   color: black; /* change text color for contrast */
 }
 
+/* Container for all cards */
 .robot-row {
-  display: flex;
-  justify-content: center;
-  gap: 12rem;
-  flex-wrap: wrap;
-  padding: 2rem 0;
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 20rem !important;  /* reduce gap for responsiveness */
+    padding: 2rem 0 !important;
+    width: 100% !important;
 }
 
-.card {
-  width: 18rem;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 12px 24px rgba(220, 215, 215, 0.5);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+/* Individual card */
+.robot-row .card {
+    display: flex !important;
+    flex-direction: column !important;  /* stack image + text vertically */
+    align-items: center !important;
+    width: 18rem !important;
+    background: #fff !important;
+    border-radius: 10px !important;
+    box-shadow: 0 12px 24px rgba(220, 215, 215, 0.5) !important;
+    padding: 1rem !important;  /* ensure text stays inside */
+    box-sizing: border-box !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
 }
 
-.card:hover {
-  transform: translateY(-5px); /* lifts the card up */
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45); /* bigger shadow on hover */
-  cursor: pointer; /* optional, shows pointer on hover */
+/* Card hover effect */
+.robot-row .card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45) !important;
+    cursor: pointer !important;
 }
 
-.card img {
-  width: 100%;
-  display: block;
+/* Card image */
+.robot-row .card img {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 8px !important;
+    display: block !important;
+    margin-bottom: 0.5rem !important;
 }
+
+/* Card text */
+.robot-row .card .card-text {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 0.5rem !important;  /* ensures text doesn’t spill */
+    box-sizing: border-box !important;
+    word-wrap: break-word !important;
+}
+
+
 
 /* ===========================
     Forms & Map
@@ -640,6 +664,52 @@ nav a.active {
     }
 }
 
+/* Pagination container spacing */
+.pagination-container {
+    margin: 3rem 0;
+}
+
+/* Pagination list */
+.pagination {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Page items */
+.pagination .page-item {
+    list-style: none;
+}
+
+/* Links and disabled page text */
+.pagination .page-link {
+    background-color: #131137;
+    color: rgb(203 46 211);
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover state for clickable links */
+.pagination .page-item .page-link:hover,
+.pagination .page-item .page-link:focus {
+    background-color: #131137;
+    color: yellow !important;
+}
+
+
+/* Disabled page (Page 1 of 1) */
+.pagination .page-item.disabled .page-link,
+.pagination .page-item.disabled .page-link:hover,
+.pagination .page-item.disabled .page-link:focus {
+    background-color: #131137;
+    color: rgb(203 46 211);
+    cursor: pointer;
+    pointer-events: none;
+}
+
 
   /* Footer */
   footer {
@@ -677,3 +747,9 @@ footer {
 .social-links a:hover {
   color: yellow;
 }
+
+
+
+
+
+
