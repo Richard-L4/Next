@@ -584,6 +584,63 @@ nav a.active {
         margin-top: 8.5rem;
     }
 }
+
+/*  Card css */
+.card {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 50%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-image-container {
+    flex: 0 0 30%; /* image takes 30% of card width */
+}
+
+.card-image {
+    width: 100%;    /* fills container */
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+.card-text {
+    flex: 1;        /* text takes remaining space */
+}
+
+@media (max-width: 800px) {
+    .card {
+        flex-direction: column;  /* stack image and text vertically */
+        width: 90%;              /* fill most of the page width */
+        margin-top: 6rem;        /* space below the hero */
+        gap: 15px;               /* spacing between image and text */
+        align-items: center;     /* center image and text horizontally */
+    }
+
+    .card-image-container {
+        flex: 0 0 auto;          /* allow natural height */
+        width: 80%;              /* image width smaller on mobile */
+    }
+
+    .card-image {
+        width: 100%;             /* fills the container */
+        height: auto;
+        margin-bottom: 10px;     /* extra spacing below image */
+    }
+
+    .card-text {
+        flex: 1;
+        text-align: center;      /* center text on mobile */
+    }
+}
+
+
   /* Footer */
   footer {
     width: 100%;

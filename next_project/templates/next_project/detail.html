@@ -1,14 +1,35 @@
 {% extends 'next_project/base.html' %}
-
+{% load static %}
 
 {% block title %}Detail | The Next Project{% endblock %}
 
 {% block content %}
 <section class="hero">
-        <div class="hero-overlay">
-            <h1 data-i18n="detail_title" class="color">The details page</h1>
-            <p data-i18n="detail_content" class="color">This page tells you about our project.</p>
-            <button id="switch-lang">English / Español</button>
+    <div class="hero-overlay">
+        <h1 data-i18n="detail_title" class="color">The details page</h1>
+        <p data-i18n="detail_content" class="color">This page tells you about our project.</p>
+        <button id="switch-lang">English / Español</button>
+    </div>
+</section>
+<div class="card">
+    <!-- image container -->
+    <div class="card-image-container">
+        <a href="{% url 'detail' %}">
+            <img src="{% static 'images/'|add:card.image_name %}" alt="{{ card.title }}" class="card-image">
+        </a>
+    </div>
+
+    <!-- text -->
+    <div class="card-text">
+        <h2 class="card-title">{{ card.title }}</h2>
+        <p class="card-content">{{ content }}</p>
+        <div class="lang-switch">
+            <a href="{% url 'detail' %}?lang=en">English</a>
+            <a href="{% url 'detail' %}?lang=es">Español</a>
         </div>
-    </section>
+    </div>
+</div>
+
+
+
 {% endblock %}

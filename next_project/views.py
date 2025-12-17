@@ -5,15 +5,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from .models import CardText
 
 
 def index(request):
     return render(request, "next_project/index.html", {'active_tab': 'index'})
-
-
-def detail(request):
-    return render(request,
-                  "next_project/detail.html", {'active_tab': 'detail'})
 
 
 def about(request):
@@ -82,3 +78,32 @@ def register(request):
     return render(request,
                   "next_project/register.html", {
                       'form': form, 'active_tab': 'register'})
+
+
+def detail_view(request):
+    lang = request.GET.get('lang', 'en')
+
+    # Get first card or None
+    card = CardText.objects.first()
+
+    if card:
+        translation = card.translations.filter(language=lang).first()
+        if translation:
+            content = translation.content
+        else:
+            content = card.content or 'Content coming soon.'
+    else:
+        # Fallback card if no cards exist
+        card = type('Card', (), {
+            'title': 'Coming Soon',
+            'image_name': 'placeholder.png',
+            'content': 'This card will be available soon.'
+
+        })()
+        content = card.content
+
+    return render(request, "next_project/detail.html", {
+        'card': card,
+        'content': content,
+        'active_tab': 'detail'  # use just a simple string, not a filename
+    })
