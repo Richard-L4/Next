@@ -7,7 +7,6 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from .models import CardText, Comment
 from django.core.paginator import Paginator
-from django.http import HttpResponseBadRequest
 
 
 def index(request):
@@ -96,10 +95,12 @@ def detail_view(request):
     if card:
         # Card content
         translation = card.translations.filter(language=lang).first()
-        content = translation.content if translation else (card.content or 'Content coming soon.')
+        content = translation.content if translation else (
+            card.content or 'Content coming soon.')
 
         # Comments
-        comments_qs = Comment.objects.filter(CardText=card).order_by('-created_at')
+        comments_qs = Comment.objects.filter(
+            CardText=card).order_by('-created_at')
         comment_paginator = Paginator(comments_qs, 5)
         comment_page_number = request.GET.get('comments_page')
         comments = comment_paginator.get_page(comment_page_number)
@@ -112,22 +113,26 @@ def detail_view(request):
                 comment_form = CommentForm(request.POST)
                 if comment_form.is_valid():
                     new_comment = comment_form.save(commit=False)
-                    new_comment.CardText = card  # attach card (note the field name)
+                    new_comment.CardText = card
                     new_comment.user = request.user
                     new_comment.save()
-                    return redirect(f"{request.path}?page={card_page_obj.number}")
+                    return redirect(
+                        f"{request.path}?page={card_page_obj.number}")
 
             elif 'edit_comment' in request.POST:
                 comment_id = request.POST.get('comment_id')
-                comment = get_object_or_404(Comment, id=comment_id, user=request.user)
+                comment = get_object_or_404(Comment, id=comment_id,
+                                            user=request.user)
                 comment_form = CommentForm(request.POST, instance=comment)
                 if comment_form.is_valid():
                     comment_form.save()
-                    return redirect(f"{request.path}?page={card_page_obj.number}")
+                    return redirect(
+                        f"{request.path}?page={card_page_obj.number}")
 
             elif 'delete_comment' in request.POST:
                 comment_id = request.POST.get('comment_id')
-                comment = get_object_or_404(Comment, id=comment_id, user=request.user)
+                comment = get_object_or_404(Comment, id=comment_id,
+                                            user=request.user)
                 comment.delete()
                 return redirect(f"{request.path}?page={card_page_obj.number}")
 
@@ -146,7 +151,8 @@ def detail_view(request):
         'card': card,
         'content': content,
         'page_obj': card_page_obj,
-        'is_paginated': card_page_obj.has_other_pages() if card_page_obj else False,
+        'is_paginated': card_page_obj.has_other_pages()
+        if card_page_obj else False,
         'comments': comments,
         'comment_form': comment_form,
         'active_tab': 'detail',

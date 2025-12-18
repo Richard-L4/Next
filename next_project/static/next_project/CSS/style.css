@@ -731,6 +731,34 @@ nav a.active {
     margin-bottom: 1.5rem;
 }
 
+.comment-card {
+    width: 100%;          /* full width of parent container */
+    max-width: 800px;     /* optional limit */
+    margin: 1rem auto;    /* center with spacing */
+    padding: 1.5rem;      /* larger padding inside */
+    font-size: 1.2rem;    /* larger text */
+    border-radius: 15px;  /* round corners */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* subtle shadow */
+    background-color: #f8f9fa; /* light background */
+}
+.comment-card p {
+    margin-bottom: 4.5rem;
+}
+.comment-card small {
+    display: block;
+    margin-top: 0.5rem;
+    color: #555;
+}
+
+/* Normal color */
+#comment-btn {
+    --bs-close-color: #096e16 !important; /* green */
+}
+
+/* Hover color */
+#comment-btn:hover {
+    --bs-close-color: #ff3b3b !important; /* red */
+}
 
   /* Footer */
   footer {
