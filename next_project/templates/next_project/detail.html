@@ -66,7 +66,7 @@
     {% elif not card %}
     <p><em>No card available to comment on.</em></p>
     {% else %}
-    <p><em>You must be logged in to add a comment.</em></p>
+    <p id="loginforcard"><em>You must be logged in to add a comment.</em></p>
     {% endif %}
 
     <!-- LIST COMMENTS -->
@@ -74,7 +74,7 @@
     <div class="card comment-card mb-3">
         <div class="card-body">
             <p>{{ comment.text }}</p>
-            <small class="text-muted">by {{ comment.user.username }}</small>
+            <small class="text-muted">by {{ comment.user.username }} · {{ comment.created_at|date:"d M Y, H:i" }}</small>
 
             {% if user == comment.user %}
             <!-- Edit Button -->
@@ -132,6 +132,38 @@
         </div>
     </div>
     {% endfor %}
+
+    {% if comments.has_other_pages %}
+<nav aria-label="Comment navigation">
+    <ul class="pagination justify-content-center">
+
+        {% if comments.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?comments_page={{ comments.previous_page_number }}">
+                « Older
+            </a>
+        </li>
+        {% endif %}
+
+        <li class="page-item disabled">
+            <span class="page-link">
+                Page {{ comments.number }} of {{ comments.paginator.num_pages }}
+            </span>
+        </li>
+
+        {% if comments.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?comments_page={{ comments.next_page_number }}">
+                Newer »
+            </a>
+        </li>
+        {% endif %}
+
+    </ul>
+</nav>
+{% endif %}
+
+
 </section>
 
 <!-- CARD PAGINATION -->
