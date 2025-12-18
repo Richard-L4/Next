@@ -1,12 +1,13 @@
-from django.shortcuts import render, redirect
-from .forms import ContactForm, RegisterForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import ContactForm, RegisterForm, CommentForm
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from .models import CardText
+from .models import CardText, Comment
 from django.core.paginator import Paginator
+from django.http import HttpResponseBadRequest
 
 
 def index(request):
@@ -85,31 +86,70 @@ def register(request):
 def detail_view(request):
     lang = request.GET.get('lang', 'en')
 
-    card_text = CardText.objects.all()
-    paginator = Paginator(card_text, 1)  # 1 card per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    # Get the card on this page
-    card = page_obj[0] if page_obj else None
+    # -------------------- CARD PAGINATION --------------------
+    cards = CardText.objects.all()
+    card_paginator = Paginator(cards, 1)
+    card_page_number = request.GET.get('page')
+    card_page_obj = card_paginator.get_page(card_page_number)
+    card = card_page_obj.object_list[0] if card_page_obj.object_list else None
 
     if card:
+        # Card content
         translation = card.translations.filter(language=lang).first()
-        content = translation.content if translation else (
-            card.content or 'Content coming soon.')
+        content = translation.content if translation else (card.content or 'Content coming soon.')
+
+        # Comments
+        comments_qs = Comment.objects.filter(CardText=card).order_by('-created_at')
+        comment_paginator = Paginator(comments_qs, 5)
+        comment_page_number = request.GET.get('comments_page')
+        comments = comment_paginator.get_page(comment_page_number)
+
+        comment_form = CommentForm()
+
+        # -------------------- HANDLE POST --------------------
+        if request.method == 'POST':
+            if 'add_comment' in request.POST:
+                comment_form = CommentForm(request.POST)
+                if comment_form.is_valid():
+                    new_comment = comment_form.save(commit=False)
+                    new_comment.CardText = card  # attach card (note the field name)
+                    new_comment.user = request.user
+                    new_comment.save()
+                    return redirect(f"{request.path}?page={card_page_obj.number}")
+
+            elif 'edit_comment' in request.POST:
+                comment_id = request.POST.get('comment_id')
+                comment = get_object_or_404(Comment, id=comment_id, user=request.user)
+                comment_form = CommentForm(request.POST, instance=comment)
+                if comment_form.is_valid():
+                    comment_form.save()
+                    return redirect(f"{request.path}?page={card_page_obj.number}")
+
+            elif 'delete_comment' in request.POST:
+                comment_id = request.POST.get('comment_id')
+                comment = get_object_or_404(Comment, id=comment_id, user=request.user)
+                comment.delete()
+                return redirect(f"{request.path}?page={card_page_obj.number}")
+
     else:
-        # Fallback card if no cards exist
+        # No card found, fallback
         card = type('Card', (), {
             'title': 'Coming Soon',
             'image_name': 'placeholder.png',
             'content': 'This card will be available soon.'
         })()
         content = card.content
+        comments = []
+        comment_form = None
 
-    return render(request, "next_project/detail.html", {
+    context = {
         'card': card,
         'content': content,
+        'page_obj': card_page_obj,
+        'is_paginated': card_page_obj.has_other_pages() if card_page_obj else False,
+        'comments': comments,
+        'comment_form': comment_form,
         'active_tab': 'detail',
-        'page_obj': page_obj,
-        'is_paginated': page_obj.has_other_pages(),
-    })
+    }
+
+    return render(request, 'next_project/detail.html', context)

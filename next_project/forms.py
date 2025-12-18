@@ -1,5 +1,5 @@
 from django import forms
-from .models import Contact, Register
+from .models import Contact, Register, Comment
 
 
 class ContactForm(forms.ModelForm):
@@ -45,3 +45,15 @@ class LoginForm(forms.Form):
             'placeholder': 'Enter your password'}),
         label="Password"
     )
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
+        widgets = {
+            'text': forms.Textarea(
+                attrs={'class': 'form-control',
+                                'rows': 3,
+                                'placeholder': 'Type your comment here...'})
+        }

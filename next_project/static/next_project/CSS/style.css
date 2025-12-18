@@ -717,6 +717,20 @@ nav a.active {
     pointer-events: none;
 }
 
+/*  Add comment on details page */
+
+#comments {
+   background-color: yellow;
+    color: rgb(203 46 211);
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;  
+    margin-bottom: 1.5rem;
+}
+
 
   /* Footer */
   footer {

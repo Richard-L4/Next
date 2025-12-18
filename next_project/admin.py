@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contact, Register, CardText, CardTextTranslation
+from .models import Contact, Register, CardText, CardTextTranslation, Comment
 
 
 # Register your models here.
@@ -21,3 +21,10 @@ class CardTextTranslationInline(admin.TabularInline):
 class CardTextAdmin(admin.ModelAdmin):
     list_display = ('title',)
     inlines = [CardTextTranslationInline]
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('CardText', 'user', 'text', 'created_at')
+    list_filter = ('CardText', 'user')
+    search_fields = ('text',)
