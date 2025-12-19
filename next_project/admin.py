@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Contact, Register, CardText, CardTextTranslation, Comment
+from .models import Contact, Register, CardText, \
+    CardTextTranslation, Comment, CommentReaction
 
 
 # Register your models here.
@@ -9,6 +10,12 @@ admin.site.register(Contact)
 @admin.register(Register)
 class RegisterAdmin(admin.ModelAdmin):
     list_display = ('name',)
+
+
+class CommentReactionLine(admin.TabularInline):
+    model = CommentReaction
+    extra = 0
+    readonly_fields = ('user', 'reaction')
 
 
 # Inline translations
@@ -28,3 +35,10 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ('CardText', 'user', 'text', 'created_at')
     list_filter = ('CardText', 'user')
     search_fields = ('text',)
+
+
+@admin.register(CommentReaction)
+class CommentReactionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'comment', 'reaction')
+    list_filter = ('reaction', 'user')
+    search_fields = ('user_username', 'comment_text')

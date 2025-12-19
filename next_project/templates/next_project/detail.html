@@ -4,10 +4,13 @@
 {% block title %}Detail | The Next Project{% endblock %}
 
 {% block content %}
+<script>
+  window.userAuthenticated = "{{ user_authenticated|yesno:'true,false' }}" === "true";
+</script>
 <section class="hero">
     <div class="hero-overlay">
-        <h1 class="color">The details page</h1>
-        <p class="color">This page tells you about our project.</p>
+        <h1 class="color" data-i18n="detail_title">The details page</h1>
+        <p class="color" data-i18n="detail_content">This page tells you about our project.</p>
         <button id="switch-lang">English / Español</button>
     </div>
 </section>
@@ -74,7 +77,24 @@
     <div class="card comment-card mb-3">
         <div class="card-body">
             <p>{{ comment.text }}</p>
-            <small class="text-muted">by {{ comment.user.username }} · {{ comment.created_at|date:"d M Y, H:i" }}</small>
+            <small class="text-muted">by {{ comment.user.username }} · {{ comment.created_at|date:"d M Y, H:i"}}</small>
+            <div class="reaction-bar">
+                <button class="reaction-btn like-btn" data-comment-id="{{ comment.id }}" data-reaction="like"
+                    type="button">
+                    👍
+                </button>
+                <span class="like-count">
+                    {{ comment.like_count }}
+                </span>
+
+                <button class="reaction-btn dislike-btn" data-comment-id="{{ comment.id }}" data-reaction="dislike"
+                    type="button">
+                    👎
+                </button>
+                <span class="dislike-count">
+                    {{ comment.dislike_count }}
+                </span>
+            </div>
 
             {% if user == comment.user %}
             <!-- Edit Button -->
@@ -134,34 +154,34 @@
     {% endfor %}
 
     {% if comments.has_other_pages %}
-<nav aria-label="Comment navigation">
-    <ul class="pagination justify-content-center">
+    <nav aria-label="Comment navigation">
+        <ul class="pagination justify-content-center">
 
-        {% if comments.has_previous %}
-        <li class="page-item">
-            <a class="page-link" href="?comments_page={{ comments.previous_page_number }}">
-                « Older
-            </a>
-        </li>
-        {% endif %}
+            {% if comments.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?comments_page={{ comments.previous_page_number }}">
+                    « Older
+                </a>
+            </li>
+            {% endif %}
 
-        <li class="page-item disabled">
-            <span class="page-link">
-                Page {{ comments.number }} of {{ comments.paginator.num_pages }}
-            </span>
-        </li>
+            <li class="page-item disabled">
+                <span class="page-link">
+                    Page {{ comments.number }} of {{ comments.paginator.num_pages }}
+                </span>
+            </li>
 
-        {% if comments.has_next %}
-        <li class="page-item">
-            <a class="page-link" href="?comments_page={{ comments.next_page_number }}">
-                Newer »
-            </a>
-        </li>
-        {% endif %}
+            {% if comments.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?comments_page={{ comments.next_page_number }}">
+                    Newer »
+                </a>
+            </li>
+            {% endif %}
 
-    </ul>
-</nav>
-{% endif %}
+        </ul>
+    </nav>
+    {% endif %}
 
 
 </section>

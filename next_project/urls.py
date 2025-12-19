@@ -9,4 +9,9 @@ urlpatterns = [
     path('confirm/logout/', views.confirm_logout, name='confirm_logout'),
     path('register/', views.register, name='register'),
     path('detail/', views.detail_view, name='detail'),
+    path(
+        'toggle-reaction/<int:comment_id>/<str:reaction_type>/',
+        views.toggle_reaction,
+        name='toggle_reaction'
+    ),
 ]

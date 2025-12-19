@@ -73,3 +73,20 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.text[:20]}"
+
+
+class CommentReaction(models.Model):
+    LIKE = 'like'
+    DISLIKE = 'dislike'
+    REACTION_CHOICES = [
+        (LIKE, 'Like'),
+        (DISLIKE, 'Dislike'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.ForeignKey(
+        Comment, on_delete=models.CASCADE, related_name='reactions')
+    reaction = models.CharField(max_length=7, choices=REACTION_CHOICES)
+
+    class Meta:
+        unique_together = ('user', 'comment')  # users can react only once

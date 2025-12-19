@@ -5,8 +5,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from .models import CardText, Comment
+from .models import CardText, Comment, CommentReaction
 from django.core.paginator import Paginator
+from django.http import JsonResponse
+from django.db.models import Count, Q
 
 
 def index(request):
@@ -100,7 +102,11 @@ def detail_view(request):
 
         # Comments
         comments_qs = Comment.objects.filter(
-            CardText=card).order_by('-created_at')
+            CardText=card).annotate(
+         like_count=Count('reactions', filter=Q(reactions__reaction='like')),
+         dislike_count=Count(
+             'reactions', filter=Q(reactions__reaction='dislike')),
+        ).order_by('-created_at')
         comment_paginator = Paginator(comments_qs, 5)
         comment_page_number = request.GET.get('comments_page')
         comments = comment_paginator.get_page(comment_page_number)
@@ -156,6 +162,35 @@ def detail_view(request):
         'comments': comments,
         'comment_form': comment_form,
         'active_tab': 'detail',
+        'user_authenticated': request.user.is_authenticated,
     }
 
     return render(request, 'next_project/detail.html', context)
+
+
+@login_required
+def toggle_reaction(request, comment_id, reaction_type):
+    if request.method != 'POST':
+        return JsonResponse({'error': 'POST required'}, status=400)
+
+    comment = get_object_or_404(Comment, id=comment_id)
+    existing = CommentReaction.objects.filter(
+        user=request.user, comment=comment).first()
+
+    if existing and existing.reaction == reaction_type:
+        existing.delete()
+        status = 'removed'
+    elif existing:
+        existing.reaction = reaction_type
+        existing.save()
+        status = 'changed'
+    else:
+        CommentReaction.objects.create(
+            user=request.user, comment=comment, reaction=reaction_type)
+        status = 'added'
+
+    likes_count = comment.reactions.filter(reaction='like').count()
+    dislikes_count = comment.reactions.filter(reaction='dislike').count()
+
+    return JsonResponse(
+        {'status': status, 'likes': likes_count, 'dislikes': dislikes_count})
