@@ -1,5 +1,7 @@
 from django import forms
-from .models import Contact, Register, Comment
+from .models import Contact, Comment
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
 class ContactForm(forms.ModelForm):
@@ -17,25 +19,26 @@ class ContactForm(forms.ModelForm):
         self.fields['phone'].required = False
 
 
-class RegisterForm(forms.ModelForm):
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
     class Meta:
-        model = Register
-        fields = ['name', 'email', 'password', 'address']
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
         widgets = {
-            'password': forms.PasswordInput(
+            'password1': forms.PasswordInput(
                 attrs={'Placeholder': 'Enter your password'}
             ),
-            'name': forms.TextInput(
+            'password2': forms.PasswordInput(
+                attrs={'Placeholder': 'Enter your password'}
+            ),
+            'username': forms.TextInput(
                 attrs={'Placeholder': 'Enter your name'}
             ),
             'email': forms.TextInput(
                 attrs={'Placeholder': 'Enter your email'}
             )
         }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['address'].required = False
 
 
 class LoginForm(forms.Form):
